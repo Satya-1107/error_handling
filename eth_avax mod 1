@@ -1,29 +1,20 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.0;
 
-contract ErrorHandling
-{
-    
-    uint public balance = 0;
-
-    //Cannot withdraw more than we have as balance
-    function withdraw(uint amount) public   {
-        require(balance > amount, "You do not have enough balance to transfer!");
-        balance -= amount;
+contract DivideByZero {
+    function divide(uint256 numerator, uint256 denominator) public pure returns (uint256) {
+        require(denominator != 0, "Division by zero is not allowed");
+        return numerator / denominator;
     }
 
-    //Cannot deposit if balance results in value greater than 500
-    function deposit(uint amount) public   {
-        balance += amount;
-        if (balance > 500) {
-            revert("Your balance is exceeding the limit!");
-        }
+    function divideWithAssert(uint256 numerator, uint256 denominator) public pure returns (uint256) {
+        assert(denominator != 0);
+        return numerator / denominator;
     }
 
-    //Checks if the balance is equals to zero
-    function isempty() public view returns (string memory){
-        assert(balance == 0);
-        return "Sorry! You have no money for the transaction.";
+    function divideWithRevert(uint256 numerator, uint256 denominator) public pure returns (uint256) {
+        require(denominator != 0, "Division by zero is not allowed");
+        return numerator / denominator;
     }
-
 }
+
