@@ -39,7 +39,7 @@ function divideWithRevert(uint256 numerator, uint256 denominator) public pure re
 
 ### DivideByZero
 
-DideByZero contract is a simple Solidity contract that provides three functions to perform division operations between two numbers. It includes error handling mechanisms to prevent division by zero.
+DivideByZero contract is a simple Solidity contract that provides three functions to perform division operations between two numbers. It includes error handling mechanisms to prevent division by zero.
 
 ## Functions
 
