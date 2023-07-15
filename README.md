@@ -1,51 +1,66 @@
-# error_handling
-**FIRST MODULE**
-**FINAL PROJECT**
+# Error Handling
+## FIRST MODULE
+## FINAL PROJECT
 
 There are three Error Handling methods in Solidity whose implementation and explanation is shown below through line by line code and it explanation.
 1. require
 2. assert
 3. revert
 
-**CODE DESCRIRTION:**
+## Code Explanation
 
 // SPDX-License-Identifier: MIT
-This is a comment that indicates the license under which the code is released. In this case, it specifies the MIT License.
 
-pragma solidity ^0.8.13;
-This is a pragma directive that specifies the version of the Solidity compiler to be used. In this case, it indicates that the code should be compiled using Solidity version 0.8.13.
+pragma solidity ^0.8.0;
 
-contract ErrorHandling { ... }
-This line declares a new contract named ErrorHandling.
+contract DivideByZero  {
 
-uint public balance = 0;
-This line declares a public state variable named balance of type uint (unsigned integer) and initializes it to 0. The public keyword automatically generates a getter function to access the value of balance.
+function divide(uint256 numerator, uint256 denomenator) public pure returns (uint256){
 
-function withdraw(uint amount) public { ... }
-This line declares a public function named withdraw that takes a parameter amount of type uint and does not return any value.
+    require(denominator !=0, "Division by zero is not allowed");
+    
+    return numerator / denominator;
+}
 
-# require(balance > amount, "You do not have enough balance to transfer!");
-This line is a condition that checks if the balance is greater than the specified amount. If it's not, the function will revert the transaction and display the error message "You do not have enough balance to transfer!".
+function divideWithAssert(uint256 numerator, uint256 denominator) public pure returns (uint256){  
 
-balance -= amount;
-This line subtracts the amount from the balance.
+    assert(denominator !=0);    
+    
+    return numerator/ denomenator;
+}
+function divideWithRevert(uint256 numerator, uint256 denominator) public pure returns (uint256){
 
-function deposit(uint amount) public { ... }
-This line declares a public function named deposit that takes a parameter amount of type uint and does not return any value.
+    if (denominator ==0){
+    
+      revert("Division by zero is not allowed");
+    }
+    return numerator / denominator;
+} 
 
-balance += amount;
-This line adds the amount to the balance.
+### DivideByZero
 
-# if (balance > 500) { revert("Your balance is exceeding the limit!"); }
-This line checks if the balance is greater than 500. If it is, the function will revert the transaction and display the error message "Your balance is exceeding the limit!".
+DideByZero contract is a simple Solidity contract that provides three functions to perform division operations between two numbers. It includes error handling mechanisms to prevent division by zero.
 
-function isempty() public view returns (string memory) { ... }
-This line declares a public view function named isempty that does not take any parameters and returns a string value.
+## Functions
 
-# assert(balance == 0);
-This line is an assertion that checks if the balance is equal to 0. If it's not, it will throw an exception.
+1. divide(uint256 numerator, uint256 denominator) → uint256
+This function performs the division operation between the numerator and denominator parameters and returns the result as an unsigned integer. It includes a require statement to check if the denominator is not zero. If the division by zero is attempted, the function reverts with an error message.
 
-return "Sorry! You have no money for the transaction.";
-This line returns the string value "Sorry! You have no money for the transaction." if the balance is equal to 0.
+2. divideWithAssert(uint256 numerator, uint256 denominator) → uint256
+Similar to the divide function, this function performs the division operation between the numerator and denominator parameters. It uses an assert statement to validate that the denominator is not zero. If the denominator is zero, the assertion fails, and the function execution reverts.
 
-Thank you!
+3. divideWithRevert(uint256 numerator, uint256 denominator) → uint256
+This function also performs the division operation between the numerator and denominator parameters. It uses an if statement to check if the denominator is zero. If it is zero, the function execution reverts with an error message. Otherwise, it returns the result of the division.
+
+## Author
+
+SATYA PRAKASH
+
+## Licence
+
+This contract is licensed under the MIT License.
+
+
+
+
+
