@@ -1,56 +1,51 @@
-# Error Handling
-## FIRST MODULE
-## FINAL PROJECT
+## Handling the Error - Solidity Contract
 
-There are three Error Handling methods in Solidity whose implementation and explanation is shown below through line by line code and it explanation.
-1. require
-2. assert
-3. revert
+This Solidity contract is designed to handle errors and enforce certain conditions on the 'money' variable. It provides three functions: 'extract', 'stake', and 'isempty' to interact with the money variable.
 
-## Code Explanation
+## Contract Details
 
-// SPDX-License-Identifier: MIT
-
-pragma solidity ^0.8.0;
-
-contract DivideByZero  {
-
-function divide(uint256 numerator, uint256 denomenator) public pure returns (uint256){
-
-    require(denominator !=0, "Division by zero is not allowed");
-    
-    return numerator / denominator;
-}
-
-function divideWithAssert(uint256 numerator, uint256 denominator) public pure returns (uint256){  
-
-    assert(denominator !=0);    
-    
-    return numerator/ denomenator;
-}
-function divideWithRevert(uint256 numerator, uint256 denominator) public pure returns (uint256){
-
-    if (denominator ==0){
-    
-      revert("Division by zero is not allowed");
-    }
-    return numerator / denominator;
-} 
-
-### DivideByZero
-
-DivideByZero contract is a simple Solidity contract that provides three functions to perform division operations between two numbers. It includes error handling mechanisms to prevent division by zero.
-
+1. Solidity version: 0.8.13
+2. License: MIT
+   
 ## Functions
 
-1. divide(uint256 numerator, uint256 denominator) → uint256
-This function performs the division operation between the numerator and denominator parameters and returns the result as an unsigned integer. It includes a require statement to check if the denominator is not zero. If the division by zero is attempted, the function reverts with an error message.
+1. extract
+   
+solidity
 
-2. divideWithAssert(uint256 numerator, uint256 denominator) → uint256
-Similar to the divide function, this function performs the division operation between the numerator and denominator parameters. It uses an assert statement to validate that the denominator is not zero. If the denominator is zero, the assertion fails, and the function execution reverts.
+function extract(uint price) public
 
-3. divideWithRevert(uint256 numerator, uint256 denominator) → uint256
-This function also performs the division operation between the numerator and denominator parameters. It uses an if statement to check if the denominator is zero. If it is zero, the function execution reverts with an error message. Otherwise, it returns the result of the division.
+The 'extract' function allows extracting a specified amount of money from the contract. It uses a 'require' statement to check if the contract has enough money to extract. If the condition is not met, it will revert with the error message "I does not have enough money."
+
+3. stake
+   
+solidity
+
+function stake(uint price) public
+
+The 'stake' function allows staking a specified amount of money to the contract. After staking, it checks if the total money exceeds 100. If it does, the function will revert with the error message "my money cannot have more than 100."
+
+4. isempty
+   
+solidity
+
+function isempty() public view returns (string memory)
+
+The 'isempty' function checks if the money variable has a value of 0. It uses an 'assert' statement to verify this condition. If the assertion fails, it will throw an exception. If the money variable is indeed 0, it returns the string message "Yes, I has no money."
+
+### detailed explanation
+
+1. extract(uint price)
+   
+This function is used to extract money from the contract's balance. It ensures that the requested amount is not greater than the available balance (money). If the balance is sufficient, the requested amount is subtracted from the balance. Otherwise, it throws an error with the message "I does not have enough money".
+
+2. stake(uint price)
+   
+The stake function is used to add money to the contract's balance. It adds the specified amount to the money variable. However, if the resulting balance exceeds 100, the function reverts the transaction and throws an error with the message "my money cannot have more than 100".
+
+3. isempty()
+   
+This function checks if the money variable has a value of 0. It uses the assert statement to verify that the balance is indeed 0. If the assertion fails, indicating that the balance is not 0, it will result in an error.
 
 ## Author
 
