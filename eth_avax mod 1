@@ -1,20 +1,27 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.13;
 
-contract DivideByZero {
-    function divide(uint256 numerator, uint256 denominator) public pure returns (uint256) {
-        require(denominator != 0, "Division by zero is not allowed");
-        return numerator / denominator;
+contract Handlingtheerror {
+    uint public money=0;
+
+    //money cannot extract more than we have
+    function extract(uint price) public   {
+        require(money > price, "I does not have enough money");
+        money -= price;
     }
 
-    function divideWithAssert(uint256 numerator, uint256 denominator) public pure returns (uint256) {
-        assert(denominator != 0);
-        return numerator / denominator;
+    //Cannot stake if it results in value greater than 100
+    function stake(uint price) public   {
+        money += price;
+        if (money > 100) {
+            revert("my money can not have more than 100");
+        }
     }
 
-    function divideWithRevert(uint256 numerator, uint256 denominator) public pure returns (uint256) {
-        require(denominator != 0, "Division by zero is not allowed");
-        return numerator / denominator;
+    //Check is money has value 0
+    function isempty() public view returns (string memory){
+        assert(money == 0);
+        return "Yes, I has no money";
     }
+
 }
-
