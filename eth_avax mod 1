@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 contract Handlingtheerror {
-    uint public money=0;
+    uint public money=50;
 
     //money cannot extract more than we have
     function extract(uint price) public   {
